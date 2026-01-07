@@ -26,12 +26,38 @@ git clone https://github.com/Arshdelight/Jimmi.git
 │   ├── 
 │   ├── ...
 ```
-其中，
-/Knowledge目录下存放的是我收集的知识，
-/Practice目录下存放的是我收集的经验，
-/Thoughts目录下存放的是我收集的思考。
+其中，  
+/Knowledge目录下存放的是我收集的知识，  
+/Practice目录下存放的是我收集的经验，  
+/Thoughts目录下存放的是我收集的思考。  
 
-每个目录的根目录下会存放一个index.md文件，用于汇总整个目录下的内容。目前每次人工更新。
-未来我会考虑加入一个自动生成index.md文件的脚本，用于自动更新目录的内容。
+每个目录的根目录下会存放一个index.md文件，用于汇总整个目录下的内容。  
 
-感谢使用。
+## index.md的脚本更新
+
+项目根目录下提供了 `update_index.py` 脚本，用于自动更新各个分类目录下的 index.md 文件。  
+将三个目录的index.md上传至NotebookLM就可以快速构建Gemini可用的知识库。
+
+**功能说明：**
+- 依次处理 Knowledge、Practice、Thoughts 三个大分类目录
+- 收集每个目录下所有的 markdown 文件（排除 index.md）
+- 按照以下格式生成 index.md 内容：
+  ```
+  # 文件相对路径
+  文件内容全文
+  ```
+- 每篇笔记之间用2次换行分隔
+- 如果目录中没有笔记则置空 index.md
+
+**使用方法：**
+```bash
+python update_index.py
+```
+
+**依赖：**
+- requirements.txt 文件已创建（当前为空，因为只使用了 Python 标准库）
+- 无需额外安装依赖包
+
+
+
+### 感谢使用。
