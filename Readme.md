@@ -48,6 +48,7 @@ Jimmi 采用清晰的三层架构设计，默认包含以下分类（支持自�
 ├── update_index.py         # ⚙️ 核心脚本
 ├── .gitignore              # 🙈 隐私配置文件
 └── requirements.txt        # 环境依赖（仅作占位，无额外依赖）
+```
 
 ## 🚀 快速开始
 
