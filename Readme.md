@@ -61,6 +61,7 @@ cd Jimmi
 2. **填充内容**
 
 在 /Docs 目录下创建你的分类文件夹，或直接使用默认的 Knowledge、Practice、Thoughts 目录，放入你的 Markdown 笔记。
+如果你不需要我（仓库作者）存入的Public笔记，你可以将其清除，避免为最终的Jimmi.md文件加入噪声。
 
 3. **生成知识库**
 
