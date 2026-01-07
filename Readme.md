@@ -58,6 +58,9 @@ python update_index.py
 - requirements.txt 文件已创建（当前为空，因为只使用了 Python 标准库）
 - 无需额外安装依赖包
 
+## 个性化的使用
+如果你不想使用我的知识库，你可以清空/Knowledge、/Practice、/Thoughts目录下的所有文件，然后添加自己的知识。
+
 
 
 ### 感谢使用。
