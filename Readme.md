@@ -31,4 +31,7 @@ git clone https://github.com/Arshdelight/Jimmi.git
 /Practice目录下存放的是我收集的经验，
 /Thoughts目录下存放的是我收集的思考。
 
+每个目录的根目录下会存放一个index.md文件，用于汇总整个目录下的内容。目前每次人工更新。
+未来我会考虑加入一个自动生成index.md文件的脚本，用于自动更新目录的内容。
+
 感谢使用。
