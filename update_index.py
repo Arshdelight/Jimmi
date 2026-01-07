@@ -1,5 +1,16 @@
 import os
+import sys
 from pathlib import Path
+
+
+def get_base_path():
+    """获取程序的基础路径，兼容打包后的 exe 和普通 Python 脚本"""
+    if getattr(sys, 'frozen', False):
+        # 如果是打包后的 exe，使用 exe 所在目录
+        return Path(sys.executable).parent
+    else:
+        # 如果是普通 Python 脚本，使用脚本所在目录
+        return Path(__file__).parent
 
 
 def collect_markdown_files(directory):
@@ -39,7 +50,7 @@ def generate_index_content(md_files, base_dir):
 
 def process_category(category_name):
     """处理单个分类目录"""
-    base_dir = Path(__file__).parent / 'Docs' / category_name
+    base_dir = get_base_path() / 'Docs' / category_name
     index_file = base_dir / 'index.md'
     
     if not base_dir.exists():
@@ -69,7 +80,7 @@ def process_category(category_name):
 
 def read_gitignore():
     """读取 .gitignore 文件，返回需要忽略的目录列表"""
-    gitignore_file = Path(__file__).parent / '.gitignore'
+    gitignore_file = get_base_path() / '.gitignore'
     ignored_dirs = []
     
     if not gitignore_file.exists():
@@ -105,7 +116,7 @@ def generate_jimmi_md(categories):
             print(f"  跳过 {category} 目录（在 .gitignore 中）")
             continue
         
-        index_file = Path(__file__).parent / 'Docs' / category / 'index.md'
+        index_file = get_base_path() / 'Docs' / category / 'index.md'
         if index_file.exists():
             index_content = read_file_content(str(index_file))
             content_parts.append(f"【{category}】\n{index_content}")
@@ -114,7 +125,7 @@ def generate_jimmi_md(categories):
     
     jimmi_content = "\n\n".join(content_parts)
     
-    jimmi_file = Path(__file__).parent / 'Jimmi.md'
+    jimmi_file = get_base_path() / 'Jimmi.md'
     try:
         with open(jimmi_file, 'w', encoding='utf-8') as f:
             f.write(jimmi_content)
@@ -125,7 +136,7 @@ def generate_jimmi_md(categories):
 
 def get_all_categories():
     """获取 Docs 目录下的所有分类目录"""
-    docs_dir = Path(__file__).parent / 'Docs'
+    docs_dir = get_base_path() / 'Docs'
     if not docs_dir.exists():
         print(f"Docs 目录不存在: {docs_dir}")
         return []

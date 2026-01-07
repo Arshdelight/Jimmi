@@ -103,6 +103,36 @@ Docs/PrivateDiary/
 
 **结果**：/Docs/PrivateDiary/index.md 依然会被生成（方便你单独使用），但其内容不会出现在根目录的 Jimmi.md 中。
 
+## 🛠️ 进阶使用
+
+### 打包为可执行文件
+
+如果你不想每次都运行 Python 脚本，可以使用 PyInstaller 将 `update_index.py` 打包成独立的可执行文件（.exe）。
+
+#### 安装 PyInstaller
+
+```bash
+pip install pyinstaller
+```
+
+#### 打包命令
+
+```bash
+pyinstaller --onefile --console update_index.py
+```
+
+#### 参数说明
+
+- `--onefile` 或 `-F`：将所有内容打包成单个可执行文件
+- `--console` 或 `-c`：显示控制台窗口（保留命令行输出）
+
+#### 使用打包后的文件
+
+打包完成后，可执行文件会出现在 `dist` 目录下。你可以：
+
+1. 将 `dist/update_index.exe` 复制到项目根目录
+2. 直接双击运行或在命令行中执行：`.\update_index.exe`
+
 ## 🤝 贡献与反馈
 
 如果你有新的想法或发现了 Bug，欢迎提交 Issue 或 Pull Request。让我们一起打造更高效的个人知识库工具！
