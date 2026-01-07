@@ -138,4 +138,12 @@ pyinstaller --onefile --console update_index.py
 
 如果你有新的想法或发现了 Bug，欢迎提交 Issue 或 Pull Request。让我们一起打造更高效的个人知识库工具！
 
+## 短期更新计划
+- [] 图形化管理界面
+- [] 知识库自由组合
+- [] 一键上传NotebookLM
+
+## 远期更新计划
+- 增添除.md以外更多格式的资料汇总
+
 <div align="center"> <sub>Built with ❤️ by Arshdelight</sub> </div>
