@@ -44,7 +44,7 @@ def process_category(category_name):
     
     if not base_dir.exists():
         print(f"目录不存在: {base_dir}")
-        return
+        return None
     
     print(f"正在处理 {category_name} 目录...")
     
@@ -61,20 +61,71 @@ def process_category(category_name):
         with open(index_file, 'w', encoding='utf-8') as f:
             f.write(content)
         print(f"  已更新 {index_file}")
+        return content
     except Exception as e:
         print(f"  写入 {index_file} 失败: {e}")
+        return None
+
+
+def generate_jimmi_md(categories):
+    """生成根目录下的 Jimmi.md 文件"""
+    print("正在生成 Jimmi.md...")
+    
+    content_parts = []
+    
+    for category in categories:
+        index_file = Path(__file__).parent / 'Docs' / category / 'index.md'
+        if index_file.exists():
+            index_content = read_file_content(str(index_file))
+            content_parts.append(f"【{category}】\n{index_content}")
+        else:
+            print(f"  警告: {category}/index.md 不存在")
+    
+    jimmi_content = "\n\n".join(content_parts)
+    
+    jimmi_file = Path(__file__).parent / 'Jimmi.md'
+    try:
+        with open(jimmi_file, 'w', encoding='utf-8') as f:
+            f.write(jimmi_content)
+        print(f"  已生成 {jimmi_file}")
+    except Exception as e:
+        print(f"  写入 {jimmi_file} 失败: {e}")
+
+
+def get_all_categories():
+    """获取 Docs 目录下的所有分类目录"""
+    docs_dir = Path(__file__).parent / 'Docs'
+    if not docs_dir.exists():
+        print(f"Docs 目录不存在: {docs_dir}")
+        return []
+    
+    categories = []
+    for item in docs_dir.iterdir():
+        if item.is_dir():
+            categories.append(item.name)
+    
+    return sorted(categories)
 
 
 def main():
     """主函数"""
-    categories = ['Knowledge', 'Practice', 'Thoughts']
+    categories = get_all_categories()
     
+    if not categories:
+        print("未找到任何分类目录")
+        return
+    
+    print(f"找到 {len(categories)} 个分类目录: {', '.join(categories)}")
     print("开始更新index.md文件...")
     print("=" * 50)
     
     for category in categories:
         process_category(category)
         print()
+    
+    print("=" * 50)
+    
+    generate_jimmi_md(categories)
     
     print("=" * 50)
     print("更新完成！")

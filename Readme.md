@@ -36,7 +36,8 @@ git clone https://github.com/Arshdelight/Jimmi.git
 ## index.md的脚本更新
 
 项目根目录下提供了 `update_index.py` 脚本，用于自动更新各个分类目录下的 index.md 文件。  
-将三个目录的index.md上传至NotebookLM就可以快速构建Gemini可用的知识库。
+~~将三个目录的index.md上传至NotebookLM就可以快速构建Gemini可用的知识库。~~
+将根目录的Jimmi.md上传至notebookLM就可以了。
 
 **功能说明：**
 - 依次处理 Knowledge、Practice、Thoughts 三个大分类目录
@@ -48,6 +49,17 @@ git clone https://github.com/Arshdelight/Jimmi.git
   ```
 - 每篇笔记之间用2次换行分隔
 - 如果目录中没有笔记则置空 index.md
+- 最后在根目录下生成 Jimmi.md，汇总三个分类的 index.md 内容，格式如下：
+  ```
+  【Knowledge】
+  Knowledge/index.md 的内容
+  
+  【Practice】
+  Practice/index.md 的内容
+  
+  【Thoughts】
+  Thoughts/index.md 的内容
+  ```
 
 **使用方法：**
 ```bash
@@ -59,7 +71,8 @@ python update_index.py
 - 无需额外安装依赖包
 
 ## 个性化的使用
-如果你不想使用我的知识库，你可以清空/Knowledge、/Practice、/Thoughts目录下的所有文件，然后添加自己的知识。
+如果你不想使用我的知识库，你可以清空/Knowledge、/Practice、/Thoughts目录下的所有文件，然后添加自己的知识。  
+此外可以自定义新的/Docs目录下的子目录名称，已设定个性化的分类。
 
 
 
