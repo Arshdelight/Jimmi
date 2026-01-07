@@ -67,13 +67,44 @@ def process_category(category_name):
         return None
 
 
+def read_gitignore():
+    """读取 .gitignore 文件，返回需要忽略的目录列表"""
+    gitignore_file = Path(__file__).parent / '.gitignore'
+    ignored_dirs = []
+    
+    if not gitignore_file.exists():
+        return ignored_dirs
+    
+    try:
+        with open(gitignore_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#'):
+                    if line.startswith('Docs/'):
+                        dir_name = line[5:].strip('/')
+                        if dir_name:
+                            ignored_dirs.append(dir_name)
+    except Exception as e:
+        print(f"读取 .gitignore 失败: {e}")
+    
+    return ignored_dirs
+
+
 def generate_jimmi_md(categories):
     """生成根目录下的 Jimmi.md 文件"""
     print("正在生成 Jimmi.md...")
     
+    ignored_dirs = read_gitignore()
+    if ignored_dirs:
+        print(f"  忽略的目录: {', '.join(ignored_dirs)}")
+    
     content_parts = []
     
     for category in categories:
+        if category in ignored_dirs:
+            print(f"  跳过 {category} 目录（在 .gitignore 中）")
+            continue
+        
         index_file = Path(__file__).parent / 'Docs' / category / 'index.md'
         if index_file.exists():
             index_content = read_file_content(str(index_file))
